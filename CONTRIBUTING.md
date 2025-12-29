@@ -362,14 +362,6 @@ Include in your PR:
    - Use standard token units
    - Explain pricing model
 
-## Review Process
-
-### Timeline
-
-- Initial review: Within 48 hours
-- Community feedback: 3-7 days
-- Final review: Within 24 hours of approval
-- Merge: After all checks pass
 
 ### Review Criteria
 
@@ -396,13 +388,6 @@ Reviewers will check:
    - ✅ Not duplicate of existing entry
    - ✅ Properly categorized with tags
 
-### Getting Help
-
-If you need help with your submission:
-
-- 💬 Ask in [GitHub Discussions](https://github.com/hpp-io/noosphere-registry/discussions)
-- 📖 Check existing examples in `registry.json`
-- 🐛 Open an [Issue](https://github.com/hpp-io/noosphere-registry/issues) for technical problems
 
 ## After Submission
 

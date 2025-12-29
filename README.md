@@ -196,17 +196,6 @@ The registry follows semantic versioning in the `version` field:
 
 Current version: **1.0.0**
 
-## Security
-
-### Reporting Issues
-
-If you discover a security vulnerability in a registered container or verifier:
-
-1. **Do NOT** open a public issue
-2. Email security@noosphere.io with details
-3. We will respond within 24 hours
-4. The entry will be marked as `INACTIVE` until resolved
-
 ### Review Process
 
 All pull requests are reviewed for:
