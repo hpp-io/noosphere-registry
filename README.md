@@ -22,13 +22,13 @@ Currently registered compute containers:
 
 - **noosphere-hello-world** - Simple Hello World testing container
 - **noosphere-llm** - LLM inference with LLM Router and Gemini
-- **noosphere-freqtrade** - Cryptocurrency trading bot
+- **noosphere-freqtrade** - Cryptocurrency price prediction (15-min candles, 3-step forecasting)
 
 ### Verifiers
 
 Currently registered verifiers with proof generation:
 
-- **Immediate Finalize Verifier** (`0x0165878A594ca255338adfa4d48449f69242Eb8F`)
+- **Immediate Finalize Verifier** (`0x672c325941E3190838523052ebFF122146864EAd`)
   - On-chain verification contract
   - Integrated proof generation service (noosphere-proof-creator)
   - Instant finalization for testnet
@@ -57,11 +57,11 @@ const aiContainers = registry.searchContainers('ai');
 console.log(`Found ${aiContainers.length} AI containers`);
 
 // Get specific container
-const container = registry.getContainer('0x000...002');
+const container = registry.getContainer('0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a');
 console.log('Container:', container.name);
 
 // Get verifier by address
-const verifier = registry.getVerifier('0x0165878A594ca255338adfa4d48449f69242Eb8F');
+const verifier = registry.getVerifier('0x672c325941E3190838523052ebFF122146864EAd');
 console.log('Verifier:', verifier.name);
 
 // Check if proof generation is required

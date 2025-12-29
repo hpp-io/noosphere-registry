@@ -69,8 +69,8 @@
       },
       "statusCode": "ACTIVE",
       "verified": true,
-      "description": "Freqtrade algorithmic trading bot container for cryptocurrency trading strategies and backtesting",
-      "tags": ["trading", "crypto", "freqtrade", "bot", "defi"],
+      "description": "Cryptocurrency price prediction container that forecasts prices 3 steps ahead using 15-minute candles",
+      "tags": ["prediction", "crypto", "freqtrade", "ml", "forecasting"],
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
     }
