@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "updatedAt": "2025-01-15T00:00:00.000Z",
+  "updatedAt": "2025-12-29T08:00:00.000Z",
   "containers": {
-    "0x8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b": {
-      "id": "0x8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b",
+    "0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a": {
+      "id": "0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a",
       "name": "noosphere-hello-world",
       "imageName": "ghcr.io/hpp-io/example-hello-world-noosphere:latest",
       "port": 8081,
@@ -19,10 +19,10 @@
       "description": "Simple Hello World example container for testing Noosphere compute requests",
       "tags": ["example", "test", "hello-world"],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-15T00:00:00.000Z"
+      "updatedAt": "2025-12-29T08:00:00.000Z"
     },
-    "0x7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8": {
-      "id": "0x7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+    "0x4548979e884d5d80117fbed9525e85279935318bdb71f8b73894cf7230686e93": {
+      "id": "0x4548979e884d5d80117fbed9525e85279935318bdb71f8b73894cf7230686e93",
       "name": "noosphere-llm",
       "imageName": "ghcr.io/hpp-io/example-llm-noosphere:latest",
       "port": 8082,
@@ -46,10 +46,10 @@
       "description": "LLM (Large Language Model) inference container supporting multiple models via LLM Router and Gemini integration",
       "tags": ["ai", "llm", "text-generation", "gemini", "nlp"],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-15T00:00:00.000Z"
+      "updatedAt": "2025-12-29T08:00:00.000Z"
     },
-    "0x5d8aa3c4c8e1c7f0d34e3b2a9c6e8f1d2b4a7e9c3f5a1b8d6c2e4f7a9b1c3d5e": {
-      "id": "0x5d8aa3c4c8e1c7f0d34e3b2a9c6e8f1d2b4a7e9c3f5a1b8d6c2e4f7a9b1c3d5e",
+    "0xfbd9e6eaa33e51a09fbe8c1c499d81bc0400ead72ae49acc3c9adb839198ea82": {
+      "id": "0xfbd9e6eaa33e51a09fbe8c1c499d81bc0400ead72ae49acc3c9adb839198ea82",
       "name": "noosphere-freqtrade",
       "imageName": "ghcr.io/hpp-io/example-freqtrade-noosphere:latest",
       "port": 8084,
@@ -72,7 +72,7 @@
       "description": "Freqtrade algorithmic trading bot container for cryptocurrency trading strategies and backtesting",
       "tags": ["trading", "crypto", "freqtrade", "bot", "defi"],
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-15T00:00:00.000Z"
+      "updatedAt": "2025-12-29T08:00:00.000Z"
     }
   },
   "verifiers": {
@@ -110,7 +110,7 @@
       "verified": true,
       "description": "Immediate finalization verifier with integrated proof generation service for Noosphere testnet",
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-15T00:00:00.000Z"
+      "updatedAt": "2025-12-29T08:00:00.000Z"
     }
   }
 }
