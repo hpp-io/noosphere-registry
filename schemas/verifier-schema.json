@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "name", "verifierAddress", "statusCode"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verifierAddress": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$",
+      "description": "Onchain verifier contract address"
+    },
+    "chainId": {
+      "type": "number",
+      "description": "Chain ID where the verifier contract is deployed (e.g., 1 for Ethereum mainnet, 11155111 for Sepolia)"
+    },
+    "sourceRepository": {
+      "type": "string",
+      "format": "uri",
+      "description": "GitHub or Git repository URL containing the verifier contract source code"
+    },
+    "commitHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Git commit hash of the deployed contract code"
+    },
+    "contractInterface": {
+      "type": "object",
+      "description": "Contract interface specification with required function signatures",
+      "properties": {
+        "abi": {
+          "type": "array",
+          "description": "Contract ABI (Application Binary Interface)"
+        },
+        "requiredFunctions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of required function signatures (e.g., 'verify(bytes calldata proof) returns (bool)')"
+        }
+      }
+    },
+    "auditReport": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to security audit report (if available)"
+    },
+    "blockExplorerUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Block explorer URL for contract verification (e.g., Etherscan)"
+    },
+    "requiresProof": {
+      "type": "boolean",
+      "description": "Whether this verifier requires proof generation"
+    },
+    "proofService": {
+      "type": "object",
+      "description": "Proof generation service configuration (required if requiresProof is true)",
+      "required": ["imageName", "port"],
+      "properties": {
+        "imageName": {
+          "type": "string",
+          "description": "Docker image for proof generation service"
+        },
+        "port": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "command": {
+          "type": "string"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "gpu": {
+              "type": "boolean"
+            },
+            "memory": {
+              "type": "string",
+              "pattern": "^[0-9]+(GB|MB)$"
+            },
+            "cpu": {
+              "type": "number",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "imageName": {
+      "type": "string",
+      "description": "Deprecated: Use proofService.imageName instead"
+    },
+    "port": {
+      "type": "number"
+    },
+    "command": {
+      "type": "string"
+    },
+    "env": {
+      "type": "object"
+    },
+    "volumes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payments": {
+      "type": "object",
+      "properties": {
+        "basePrice": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "per": {
+          "type": "string"
+        }
+      }
+    },
+    "statusCode": {
+      "type": "string",
+      "enum": ["ACTIVE", "INACTIVE", "DEPRECATED"]
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

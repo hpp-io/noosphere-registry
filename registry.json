@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2025-01-15T00:00:00.000Z",
+  "containers": {
+    "0x8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b": {
+      "id": "0x8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b",
+      "name": "noosphere-hello-world",
+      "imageName": "ghcr.io/hpp-io/example-hello-world-noosphere:latest",
+      "port": 8081,
+      "env": {},
+      "volumes": [],
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Simple Hello World example container for testing Noosphere compute requests",
+      "tags": ["example", "test", "hello-world"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    },
+    "0x7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8": {
+      "id": "0x7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+      "name": "noosphere-llm",
+      "imageName": "ghcr.io/hpp-io/example-llm-noosphere:latest",
+      "port": 8082,
+      "env": {
+        "LLMROUTER_BASE_URL": "CONFIGURE_YOUR_URL",
+        "LLMROUTER_API_KEY": "CONFIGURE_YOUR_KEY",
+        "GEMINI_API_KEY": "CONFIGURE_YOUR_GEMINI_KEY"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "4GB",
+        "cpu": 2
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "LLM (Large Language Model) inference container supporting multiple models via LLM Router and Gemini integration",
+      "tags": ["ai", "llm", "text-generation", "gemini", "nlp"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    },
+    "0x5d8aa3c4c8e1c7f0d34e3b2a9c6e8f1d2b4a7e9c3f5a1b8d6c2e4f7a9b1c3d5e": {
+      "id": "0x5d8aa3c4c8e1c7f0d34e3b2a9c6e8f1d2b4a7e9c3f5a1b8d6c2e4f7a9b1c3d5e",
+      "name": "noosphere-freqtrade",
+      "imageName": "ghcr.io/hpp-io/example-freqtrade-noosphere:latest",
+      "port": 8084,
+      "env": {
+        "EXCHANGE_KEY": "CONFIGURE_YOUR_EXCHANGE_KEY",
+        "EXCHANGE_SECRET": "CONFIGURE_YOUR_EXCHANGE_SECRET"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "2GB",
+        "cpu": 2
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Freqtrade algorithmic trading bot container for cryptocurrency trading strategies and backtesting",
+      "tags": ["trading", "crypto", "freqtrade", "bot", "defi"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    }
+  },
+  "verifiers": {
+    "0x672c325941E3190838523052ebFF122146864EAd": {
+      "id": "0165878a-594c-a255-338a-dfa4d48449f6",
+      "name": "Immediate Finalize Verifier",
+      "verifierAddress": "0x672c325941E3190838523052ebFF122146864EAd",
+      "chainId": 181228,
+      "sourceRepository": "https://github.com/hpp-io/noosphere-evm/blob/develop/src/v1_0_0/verifier/ImmediateFinalizeVerifier.sol",
+      "commitHash": "a1b2c3d4e5f6789012345678901234567890abcd",
+      "contractInterface": {
+        "requiredFunctions": [
+          "verify(bytes calldata proof) returns (bool)"
+        ]
+      },
+      "blockExplorerUrl": "https://sepolia-explorer.hpp.io/address/0x672c325941E3190838523052ebFF122146864EAd?tab=contract",
+      "requiresProof": true,
+      "proofService": {
+        "imageName": "ghcr.io/hpp-io/noosphere-proof-creator:test2",
+        "port": 3000,
+        "command": "npm start",
+        "env": {
+          "RPC_URL": "CONFIGURE_YOUR_RPC_URL",
+          "CHAIN_ID": "CONFIGURE_CHAIN_ID",
+          "IMMEDIATE_FINALIZE_VERIFIER_ADDRESS": "CONFIGURE_VERIFIER_ADDRESS",
+          "PRIVATE_KEY": "CONFIGURE_YOUR_PRIVATE_KEY"
+        },
+        "requirements": {
+          "gpu": false,
+          "memory": "1GB",
+          "cpu": 1
+        }
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Immediate finalization verifier with integrated proof generation service for Noosphere testnet",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    }
+  }
+}

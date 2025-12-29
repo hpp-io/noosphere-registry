@@ -1,0 +1,92 @@
+name: Validate Registry
+
+on:
+  pull_request:
+    paths:
+      - 'registry.json'
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate registry schema
+        run: npm run validate
+
+      - name: Check for duplicate IDs
+        run: |
+          node -e "
+          const registry = require('./registry.json');
+
+          // Check container duplicates
+          const containerIds = Object.keys(registry.containers);
+          const duplicateContainers = containerIds.filter((id, i) => containerIds.indexOf(id) !== i);
+
+          // Check verifier duplicates
+          const verifierAddresses = Object.keys(registry.verifiers);
+          const duplicateVerifiers = verifierAddresses.filter((addr, i) => verifierAddresses.indexOf(addr) !== i);
+
+          // Check verifier ID duplicates
+          const verifierIds = Object.values(registry.verifiers).map(v => v.id);
+          const duplicateVerifierIds = verifierIds.filter((id, i) => verifierIds.indexOf(id) !== i);
+
+          let hasError = false;
+
+          if (duplicateContainers.length > 0) {
+            console.error('❌ Duplicate container IDs found:', duplicateContainers);
+            hasError = true;
+          }
+
+          if (duplicateVerifiers.length > 0) {
+            console.error('❌ Duplicate verifier addresses found:', duplicateVerifiers);
+            hasError = true;
+          }
+
+          if (duplicateVerifierIds.length > 0) {
+            console.error('❌ Duplicate verifier IDs found:', duplicateVerifierIds);
+            hasError = true;
+          }
+
+          if (hasError) {
+            process.exit(1);
+          }
+
+          console.log('✅ No duplicate IDs found');
+          console.log('   Containers:', containerIds.length);
+          console.log('   Verifiers:', verifierAddresses.length);
+          "
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "✅ Registry validation passed!"
+          echo ""
+          node -e "
+          const registry = require('./registry.json');
+          console.log('Registry Statistics:');
+          console.log('  Version:', registry.version);
+          console.log('  Last Updated:', registry.updatedAt);
+          console.log('  Total Containers:', Object.keys(registry.containers).length);
+          console.log('  Total Verifiers:', Object.keys(registry.verifiers).length);
+
+          const activeContainers = Object.values(registry.containers).filter(c => c.statusCode === 'ACTIVE').length;
+          const activeVerifiers = Object.values(registry.verifiers).filter(v => v.statusCode === 'ACTIVE').length;
+
+          console.log('  Active Containers:', activeContainers);
+          console.log('  Active Verifiers:', activeVerifiers);
+          "

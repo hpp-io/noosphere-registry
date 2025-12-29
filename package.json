@@ -1,0 +1,28 @@
+{
+  "name": "noosphere-registry",
+  "version": "1.0.0",
+  "description": "Community registry for Noosphere containers and verifiers",
+  "main": "registry.json",
+  "scripts": {
+    "validate": "node scripts/validate-registry.js",
+    "test": "npm run validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hpp-io/noosphere-registry.git"
+  },
+  "keywords": [
+    "noosphere",
+    "registry",
+    "containers",
+    "verifiers",
+    "blockchain",
+    "compute"
+  ],
+  "author": "Noosphere Team",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
+  }
+}
