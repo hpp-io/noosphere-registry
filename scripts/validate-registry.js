@@ -10,6 +10,7 @@ addFormats(ajv);
 // Load schemas
 const containerSchema = JSON.parse(fs.readFileSync('./schemas/container-schema.json', 'utf-8'));
 const verifierSchema = JSON.parse(fs.readFileSync('./schemas/verifier-schema.json', 'utf-8'));
+const deploymentSchema = JSON.parse(fs.readFileSync('./schemas/deployment-schema.json', 'utf-8'));
 
 // Load registry
 const registry = JSON.parse(fs.readFileSync('./registry.json', 'utf-8'));
@@ -18,6 +19,7 @@ const registry = JSON.parse(fs.readFileSync('./registry.json', 'utf-8'));
 let isValid = true;
 let validContainers = 0;
 let validVerifiers = 0;
+let validDeployments = 0;
 
 console.log('🔍 Validating Noosphere Registry\n');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -48,6 +50,21 @@ for (const [address, verifier] of Object.entries(registry.verifiers)) {
   }
 }
 
+if (registry.deployments) {
+  console.log('\n🌐 Validating Deployments...\n');
+  for (const [chainId, deployment] of Object.entries(registry.deployments)) {
+    const validate = ajv.compile(deploymentSchema);
+    if (!validate(deployment)) {
+      console.error(`❌ Deployment ${chainId} is invalid:`);
+      console.error(validate.errors);
+      isValid = false;
+    } else {
+      console.log(`✅ ${deployment.name} (chainId: ${deployment.chainId})`);
+      validDeployments++;
+    }
+  }
+}
+
 console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 if (!isValid) {
@@ -58,4 +75,5 @@ if (!isValid) {
 console.log('\n✅ All entries are valid!');
 console.log(`   Containers: ${validContainers}`);
 console.log(`   Verifiers: ${validVerifiers}`);
+console.log(`   Deployments: ${validDeployments}`);
 console.log(`   Registry version: ${registry.version}\n`);

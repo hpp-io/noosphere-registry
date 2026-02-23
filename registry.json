@@ -73,6 +73,31 @@
       "tags": ["prediction", "crypto", "freqtrade", "ml", "forecasting"],
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
+    },
+    "0x92ff287334dfa1f984d4105f5b775acdc199a48c27b9d106ded46361df73e0be": {
+      "id": "0x92ff287334dfa1f984d4105f5b775acdc199a48c27b9d106ded46361df73e0be",
+      "name": "noosphere-vrng",
+      "imageName": "ghcr.io/hpp-io/example-vrng-noosphere:latest",
+      "port": 8085,
+      "env": {
+        "MASTER_SECRET": "CONFIGURE_YOUR_MASTER_SECRET"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "2GB",
+        "cpu": 1
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Verifiable Random Number Generator (VRNG) container for Noosphere VRF — provides cryptographically secure random values for on-chain applications like dice games, lotteries, and NFT minting",
+      "tags": ["vrf", "random", "vrng", "cryptography", "gaming"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-02-23T08:00:00.000Z"
     }
   },
   "verifiers": {
@@ -111,6 +136,24 @@
       "description": "Immediate finalization verifier with integrated proof generation service for Noosphere testnet",
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
+    }
+  },
+  "deployments": {
+    "181228": {
+      "chainId": 181228,
+      "name": "HPP Sepolia",
+      "rpcUrl": "https://sepolia.hpp.io",
+      "wsRpcUrl": "wss://sepolia.hpp.io",
+      "blockExplorerUrl": "https://sepolia-explorer.hpp.io",
+      "contracts": {
+        "router": "0x480a4f7506548773040d47dd7b6372dbf71358d4",
+        "coordinator": "0xeda4a7957e8f5de6cd6bd747c3ccd5e1c295302c",
+        "noosphereVRF": "0xB4f998EbFc9D1327580243CeCdeD53798c496EbF",
+        "walletFactory": "0xe1ccab0b5deeca0b240f9bbaeccdbcb252934fa7"
+      },
+      "statusCode": "ACTIVE",
+      "description": "Noosphere testnet deployment on HPP Sepolia",
+      "updatedAt": "2026-02-23T08:00:00.000Z"
     }
   }
 }

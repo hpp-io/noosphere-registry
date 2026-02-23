@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["chainId", "name", "contracts", "statusCode"],
+  "properties": {
+    "chainId": {
+      "type": "number",
+      "description": "EVM chain ID"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable network name"
+    },
+    "rpcUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "JSON-RPC endpoint"
+    },
+    "wsRpcUrl": {
+      "type": "string",
+      "description": "WebSocket RPC endpoint"
+    },
+    "blockExplorerUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Block explorer base URL"
+    },
+    "contracts": {
+      "type": "object",
+      "required": ["router", "coordinator"],
+      "properties": {
+        "router": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "IRouter contract address"
+        },
+        "coordinator": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Coordinator contract address"
+        },
+        "noosphereVRF": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "NoosphereVRF contract address"
+        },
+        "walletFactory": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "WalletFactory contract address"
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^0x[a-fA-F0-9]{40}$"
+      }
+    },
+    "statusCode": {
+      "type": "string",
+      "enum": ["ACTIVE", "INACTIVE", "DEPRECATED"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
