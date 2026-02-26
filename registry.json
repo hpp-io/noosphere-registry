@@ -18,6 +18,13 @@
       "verified": true,
       "description": "Simple Hello World example container for testing Noosphere compute requests",
       "tags": ["example", "test", "hello-world"],
+      "inputSchema": {
+        "type": "object",
+        "required": ["input"],
+        "properties": {
+          "input": { "type": "string", "description": "User input text" }
+        }
+      },
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
     },
@@ -45,6 +52,27 @@
       "verified": true,
       "description": "LLM (Large Language Model) inference container supporting multiple models via LLM Router and Gemini integration",
       "tags": ["ai", "llm", "text-generation", "gemini", "nlp"],
+      "inputSchema": {
+        "type": "object",
+        "required": ["prompt", "model"],
+        "properties": {
+          "prompt": { "type": "string", "description": "Text prompt for LLM inference" },
+          "model": {
+            "type": "string",
+            "description": "Model identifier in provider/model-name format",
+            "default": "openai/gpt-5",
+            "examples": ["openai/gpt-5", "gemini/gemini-2.5-flash", "anthropic/claude-3"]
+          },
+          "image": {
+            "type": "object",
+            "description": "Optional base64-encoded image for multimodal input",
+            "properties": {
+              "type": { "type": "string", "description": "MIME type (e.g. image/png)" },
+              "data": { "type": "string", "description": "Base64-encoded image data" }
+            }
+          }
+        }
+      },
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
     },
@@ -71,6 +99,7 @@
       "verified": true,
       "description": "Cryptocurrency price prediction container that forecasts prices 3 steps ahead using 15-minute candles",
       "tags": ["prediction", "crypto", "freqtrade", "ml", "forecasting"],
+      "inputSchema": null,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2025-12-29T08:00:00.000Z"
     },
@@ -96,6 +125,7 @@
       "verified": true,
       "description": "Verifiable Random Number Generator (VRNG) container for Noosphere VRF — provides cryptographically secure random values for on-chain applications like dice games, lotteries, and NFT minting",
       "tags": ["vrf", "random", "vrng", "cryptography", "gaming"],
+      "inputSchema": null,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "updatedAt": "2026-02-23T08:00:00.000Z"
     }
@@ -151,6 +181,7 @@
         "noosphereVRF": "0xB4f998EbFc9D1327580243CeCdeD53798c496EbF",
         "walletFactory": "0xe1ccab0b5deeca0b240f9bbaeccdbcb252934fa7"
       },
+      "routeId": "0x436f6f7264696e61746f725f76312e302e300000000000000000000000000000",
       "statusCode": "ACTIVE",
       "description": "Noosphere testnet deployment on HPP Sepolia",
       "updatedAt": "2026-02-23T08:00:00.000Z"
