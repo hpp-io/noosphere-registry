@@ -9,29 +9,21 @@ Public registry of verified compute containers and proof verifiers for the Noosp
 
 This registry enables:
 
-- **🔍 Discovery**: Find community-verified containers and verifiers
-- **🤝 Sharing**: Contribute your own containers and verifiers
-- **🔄 Auto-sync**: Automatic synchronization with Noosphere SDK
-- **🌐 Decentralized**: No central authority required
+- **Discovery**: Find community-verified containers and verifiers
+- **Sharing**: Contribute your own containers and verifiers
+- **Auto-sync**: Automatic synchronization with Noosphere SDK
+- **Multi-network**: Separate registry per network (testnet, mainnet)
 
-## Registry Contents
+## Networks
 
-### Containers
+| Network | Chain ID | Registry File | Status |
+|---------|----------|---------------|--------|
+| HPP Sepolia (Testnet) | 181228 | [`networks/181228.json`](networks/181228.json) | Active |
+| HPP Mainnet | 190415 | [`networks/190415.json`](networks/190415.json) | Pending |
 
-Currently registered compute containers:
+Each network file contains the complete registry (`containers`, `verifiers`, `deployments`) for that specific chain. This ensures network-level isolation — mainnet changes never affect testnet and vice versa.
 
-- **noosphere-hello-world** - Simple Hello World testing container
-- **noosphere-llm** - LLM inference with LLM Router and Gemini
-- **noosphere-freqtrade** - Cryptocurrency price prediction (15-min candles, 3-step forecasting)
-
-### Verifiers
-
-Currently registered verifiers with proof generation:
-
-- **Immediate Finalize Verifier** (`0x672c325941E3190838523052ebFF122146864EAd`)
-  - On-chain verification contract
-  - Integrated proof generation service (noosphere-proof-creator)
-  - Instant finalization for testnet
+> **Legacy**: `registry.json` at the root is maintained for backward compatibility with older SDK versions. New integrations should use the network-specific files.
 
 ## Usage with Noosphere SDK
 
@@ -42,26 +34,33 @@ npm install @noosphere/registry
 ```typescript
 import { RegistryManager } from '@noosphere/registry';
 
-// Initialize with community registry
-const registry = new RegistryManager({
-  remotePath: 'https://raw.githubusercontent.com/hpp-io/noosphere-registry/main/registry.json',
+// Testnet
+const testnetRegistry = new RegistryManager({
+  remotePath: 'https://raw.githubusercontent.com/hpp-io/noosphere-registry/main/networks/181228.json',
   autoSync: true,
   cacheTTL: 3600000, // 1 hour
 });
 
+// Mainnet
+const mainnetRegistry = new RegistryManager({
+  remotePath: 'https://raw.githubusercontent.com/hpp-io/noosphere-registry/main/networks/190415.json',
+  autoSync: true,
+  cacheTTL: 3600000,
+});
+
 // Load (automatically syncs from GitHub)
-await registry.load();
+await mainnetRegistry.load();
 
 // Search containers
-const aiContainers = registry.searchContainers('ai');
+const aiContainers = mainnetRegistry.searchContainers('ai');
 console.log(`Found ${aiContainers.length} AI containers`);
 
 // Get specific container
-const container = registry.getContainer('0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a');
+const container = mainnetRegistry.getContainer('0x2fe108c...');
 console.log('Container:', container.name);
 
 // Get verifier by address
-const verifier = registry.getVerifier('0x672c325941E3190838523052ebFF122146864EAd');
+const verifier = mainnetRegistry.getVerifier('0x672c32...');
 console.log('Verifier:', verifier.name);
 
 // Check if proof generation is required
@@ -70,12 +69,32 @@ if (verifier.requiresProof && verifier.proofService) {
 }
 ```
 
+## Registry Contents
+
+### Containers
+
+Currently registered compute containers:
+
+- **noosphere-hello-world** - Simple Hello World testing container
+- **noosphere-llm** - LLM inference with LLM Router and Gemini
+- **noosphere-freqtrade** - Cryptocurrency price prediction (15-min candles, 3-step forecasting)
+- **noosphere-vrng** - Verifiable Random Number Generator for on-chain VRF
+
+### Verifiers
+
+Currently registered verifiers with proof generation:
+
+- **Immediate Finalize Verifier**
+  - On-chain verification contract
+  - Integrated proof generation service (noosphere-proof-creator)
+  - Instant finalization
+
 ## Contributing
 
 We welcome contributions! To add a container or verifier:
 
 1. **Fork this repository**
-2. **Add your entry** to `registry.json`
+2. **Add your entry** to the appropriate network file in `networks/`
 3. **Validate locally**: `npm install && npm run validate`
 4. **Submit a pull request** with:
    - Container/Verifier metadata
@@ -91,6 +110,7 @@ All entries are automatically validated against JSON schemas:
 
 - [Container Schema](schemas/container-schema.json)
 - [Verifier Schema](schemas/verifier-schema.json)
+- [Deployment Schema](schemas/deployment-schema.json)
 
 ### Container Schema
 
@@ -126,9 +146,13 @@ All entries are automatically validated against JSON schemas:
   "id": "uuid",                        // UUID (required)
   "name": "verifier-name",             // Name (required)
   "verifierAddress": "0x...",          // Contract address (required)
-  "imageName": "docker/verifier",      // Docker image (required)
-  "port": 8080,                        // Port
-  "command": "npm start",              // Startup command
+  "chainId": 181228,                   // Chain where deployed
+  "requiresProof": true,              // Proof generation required
+  "proofService": {                    // Proof service config
+    "imageName": "docker/verifier",
+    "port": 8080,
+    "command": "npm start"
+  },
   "statusCode": "ACTIVE",              // Status
   "verified": true,                    // Verified
   "description": "..."                 // Description
@@ -145,37 +169,18 @@ npm install
 npm run validate
 ```
 
-Expected output:
-```
-🔍 Validating Noosphere Registry
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📦 Validating Containers...
-
-✅ noosphere-hello-world (0x8a35acfb...)
-✅ noosphere-llm (0x7c9fa136...)
-✅ noosphere-freqtrade (0x5d8aa3c4...)
-
-🔐 Validating Verifiers...
-
-✅ Immediate Finalize Verifier (0x0165878A...)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ All entries are valid!
-   Containers: 3
-   Verifiers: 1
-   Registry version: 1.0.0
-```
-
 ## Registry Structure
 
 ```
 noosphere-registry/
-├── registry.json              # Main registry file
+├── registry.json              # Legacy registry (backward compatibility)
+├── networks/
+│   ├── 181228.json            # HPP Sepolia testnet registry
+│   └── 190415.json            # HPP Mainnet registry
 ├── schemas/
 │   ├── container-schema.json  # Container validation schema
-│   └── verifier-schema.json   # Verifier validation schema
+│   ├── verifier-schema.json   # Verifier validation schema
+│   └── deployment-schema.json # Deployment validation schema
 ├── scripts/
 │   └── validate-registry.js   # Validation script
 ├── .github/
@@ -200,16 +205,12 @@ Current version: **1.0.0**
 
 All pull requests are reviewed for:
 
-- ✅ Schema compliance
-- ✅ Docker image accessibility
-- ✅ Security considerations
-- ✅ Documentation quality
-- ✅ Test coverage
+- Schema compliance
+- Docker image accessibility
+- Security considerations
+- Documentation quality
+- Test coverage
 
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
-
----
-
-**Built with ❤️ for the decentralized compute revolution**

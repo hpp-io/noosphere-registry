@@ -1,0 +1,189 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-03-05T00:00:00.000Z",
+  "containers": {
+    "0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a": {
+      "id": "0x2fe108c896fbbc20874ff97c7f230c6d06da1e60e731cbedae60125468f8333a",
+      "name": "noosphere-hello-world",
+      "imageName": "ghcr.io/hpp-io/example-hello-world-noosphere:latest",
+      "port": 8081,
+      "env": {},
+      "volumes": [],
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Simple Hello World example container for testing Noosphere compute requests",
+      "tags": ["example", "test", "hello-world"],
+      "inputSchema": {
+        "type": "object",
+        "required": ["input"],
+        "properties": {
+          "input": { "type": "string", "description": "User input text" }
+        }
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    },
+    "0x4548979e884d5d80117fbed9525e85279935318bdb71f8b73894cf7230686e93": {
+      "id": "0x4548979e884d5d80117fbed9525e85279935318bdb71f8b73894cf7230686e93",
+      "name": "noosphere-llm",
+      "imageName": "ghcr.io/hpp-io/example-llm-noosphere:latest",
+      "port": 8082,
+      "env": {
+        "LLMROUTER_BASE_URL": "CONFIGURE_YOUR_URL",
+        "LLMROUTER_API_KEY": "CONFIGURE_YOUR_KEY",
+        "GEMINI_API_KEY": "CONFIGURE_YOUR_GEMINI_KEY"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "4GB",
+        "cpu": 2
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "LLM (Large Language Model) inference container supporting multiple models via LLM Router and Gemini integration",
+      "tags": ["ai", "llm", "text-generation", "gemini", "nlp"],
+      "inputSchema": {
+        "type": "object",
+        "required": ["prompt", "model"],
+        "properties": {
+          "prompt": { "type": "string", "description": "Text prompt for LLM inference" },
+          "model": {
+            "type": "string",
+            "description": "Model identifier in provider/model-name format",
+            "default": "openai/gpt-5",
+            "examples": ["openai/gpt-5", "gemini/gemini-2.5-flash", "anthropic/claude-3"]
+          },
+          "image": {
+            "type": "object",
+            "description": "Optional base64-encoded image for multimodal input",
+            "properties": {
+              "type": { "type": "string", "description": "MIME type (e.g. image/png)" },
+              "data": { "type": "string", "description": "Base64-encoded image data" }
+            }
+          }
+        }
+      },
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    },
+    "0xfbd9e6eaa33e51a09fbe8c1c499d81bc0400ead72ae49acc3c9adb839198ea82": {
+      "id": "0xfbd9e6eaa33e51a09fbe8c1c499d81bc0400ead72ae49acc3c9adb839198ea82",
+      "name": "noosphere-freqtrade",
+      "imageName": "ghcr.io/hpp-io/example-freqtrade-noosphere:latest",
+      "port": 8084,
+      "env": {
+        "EXCHANGE_KEY": "CONFIGURE_YOUR_EXCHANGE_KEY",
+        "EXCHANGE_SECRET": "CONFIGURE_YOUR_EXCHANGE_SECRET"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "2GB",
+        "cpu": 2
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Cryptocurrency price prediction container that forecasts prices 3 steps ahead using 15-minute candles",
+      "tags": ["prediction", "crypto", "freqtrade", "ml", "forecasting"],
+      "inputSchema": null,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    },
+    "0x92ff287334dfa1f984d4105f5b775acdc199a48c27b9d106ded46361df73e0be": {
+      "id": "0x92ff287334dfa1f984d4105f5b775acdc199a48c27b9d106ded46361df73e0be",
+      "name": "noosphere-vrng",
+      "imageName": "ghcr.io/hpp-io/example-vrng-noosphere:latest",
+      "port": 8085,
+      "env": {
+        "MASTER_SECRET": "CONFIGURE_YOUR_MASTER_SECRET"
+      },
+      "requirements": {
+        "gpu": false,
+        "memory": "2GB",
+        "cpu": 1
+      },
+      "payments": {
+        "basePrice": "1000",
+        "token": "0x0000000000000000000000000000000000000000",
+        "per": "request"
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Verifiable Random Number Generator (VRNG) container for Noosphere VRF",
+      "tags": ["vrf", "random", "vrng", "cryptography", "gaming"],
+      "inputSchema": null,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    }
+  },
+  "verifiers": {
+    "0xFF46177E5210A8dc31E98477295d6A91510d67a0": {
+      "id": "a2b3c4d5-e6f7-8901-2345-678901234567",
+      "name": "Immediate Finalize Verifier",
+      "verifierAddress": "0xFF46177E5210A8dc31E98477295d6A91510d67a0",
+      "chainId": 190415,
+      "sourceRepository": "https://github.com/hpp-io/noosphere-evm/blob/main/src/v1_0_0/verifier/ImmediateFinalizeVerifier.sol",
+      "contractInterface": {
+        "requiredFunctions": [
+          "verify(bytes calldata proof) returns (bool)"
+        ]
+      },
+      "blockExplorerUrl": "https://explorer.hpp.io/address/0xFF46177E5210A8dc31E98477295d6A91510d67a0?tab=contract",
+      "requiresProof": true,
+      "proofService": {
+        "imageName": "ghcr.io/hpp-io/noosphere-proof-creator:latest",
+        "port": 3000,
+        "command": "npm start",
+        "env": {
+          "RPC_URL": "CONFIGURE_YOUR_RPC_URL",
+          "CHAIN_ID": "CONFIGURE_CHAIN_ID",
+          "IMMEDIATE_FINALIZE_VERIFIER_ADDRESS": "CONFIGURE_VERIFIER_ADDRESS",
+          "PRIVATE_KEY": "CONFIGURE_YOUR_PRIVATE_KEY"
+        },
+        "requirements": {
+          "gpu": false,
+          "memory": "1GB",
+          "cpu": 1
+        }
+      },
+      "statusCode": "ACTIVE",
+      "verified": true,
+      "description": "Immediate finalization verifier with integrated proof generation service for Noosphere mainnet",
+      "createdAt": "2026-03-05T00:00:00.000Z",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    }
+  },
+  "deployments": {
+    "190415": {
+      "chainId": 190415,
+      "name": "HPP Mainnet",
+      "rpcUrl": "https://mainnet.hpp.io",
+      "wsRpcUrl": "wss://mainnet.hpp.io",
+      "blockExplorerUrl": "https://explorer.hpp.io",
+      "contracts": {
+        "router": "0x043F992d67dE8c86141EA5e0897b5244cD97dac4",
+        "coordinator": "0x8b4951d0C2B15Ef4DE1f355e132A40Ac6c84E728",
+        "noosphereVRF": "0xFd3Fc50bC7b798eDFfCFaB948A1Fd1d614fDA24c",
+        "walletFactory": "0xD57d57F93266555302abD8EB3A1A349249453C16"
+      },
+      "routeId": "0x436f6f7264696e61746f725f76312e302e300000000000000000000000000000",
+      "statusCode": "ACTIVE",
+      "description": "Noosphere mainnet deployment on HPP Mainnet",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    }
+  }
+}
