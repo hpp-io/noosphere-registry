@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-03-05T00:00:00.000Z",
+  "containers": {},
+  "verifiers": {},
+  "deployments": {
+    "190415": {
+      "chainId": 190415,
+      "name": "HPP Mainnet",
+      "rpcUrl": "https://mainnet.hpp.io",
+      "wsRpcUrl": "wss://mainnet.hpp.io",
+      "blockExplorerUrl": "https://explorer.hpp.io",
+      "contracts": {},
+      "routeId": "0x436f6f7264696e61746f725f76312e302e300000000000000000000000000000",
+      "statusCode": "INACTIVE",
+      "description": "Noosphere mainnet deployment on HPP Mainnet (pending deployment)",
+      "updatedAt": "2026-03-05T00:00:00.000Z"
+    }
+  }
+}
