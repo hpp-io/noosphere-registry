@@ -177,7 +177,7 @@
       "contracts": {
         "router": "0x043F992d67dE8c86141EA5e0897b5244cD97dac4",
         "coordinator": "0x8b4951d0C2B15Ef4DE1f355e132A40Ac6c84E728",
-        "noosphereVRF": "0xFd3Fc50bC7b798eDFfCFaB948A1Fd1d614fDA24c",
+        "noosphereVRF": "0x6d179D718C7B772CA0d6f694308fb22A516a6eFf",
         "walletFactory": "0xD57d57F93266555302abD8EB3A1A349249453C16"
       },
       "routeId": "0x436f6f7264696e61746f725f76312e302e300000000000000000000000000000",
